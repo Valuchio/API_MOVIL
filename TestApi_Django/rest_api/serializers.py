@@ -8,7 +8,7 @@ class AlumnoSerializer(serializers.ModelSerializer):
         model = Alumno
         fields = ['idAlumno', 'Gmail', 'Contrasena', 'nombreAlumno','rol']
 
-class ProfesoSerializer(serializers.ModelSerializer):
+class ProfesorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profesor
         fields = ['idProfesor', 'Gmail', 'Contrasena', 'nombreProfesor']
