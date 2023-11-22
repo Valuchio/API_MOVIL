@@ -1,24 +1,26 @@
 from rest_framework import serializers
-from core.models import Alumno
-from core.models import Profesor
-from core.models import Asistencia
-from core.models import Curso
+from core.models import Alumno, Asistencia, Profesor,Curso
+
 class AlumnoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alumno
-        fields = ['idAlumno', 'Gmail', 'Contrasena', 'nombreAlumno','rol']
+        fields = '__all__'
 
-class ProfesoSerializer(serializers.ModelSerializer):
+class CursoSerializer(serializers.ModelSerializer):
+    alumnos = AlumnoSerializer(many=True, read_only=True)
+
     class Meta:
-        model = Profesor
-        fields = ['idProfesor', 'Gmail', 'Contrasena', 'nombreProfesor']
+        model = Curso
+        fields = '__all__'
 
 class AsistenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asistencia
-        fields = ['alumno', 'curso', 'fecha', 'presente']
+        fields = '__all__'
 
-class CursoSerializer(serializers.ModelSerializer):
+class ProfesorSerializer(serializers.ModelSerializer):
+    cursos = CursoSerializer(many=True, read_only=True)
+
     class Meta:
-        model = Curso
-        fields = ['nombre', 'codigo', 'seccion', 'alumnos']
+        model = Profesor
+        fields = '__all__'
